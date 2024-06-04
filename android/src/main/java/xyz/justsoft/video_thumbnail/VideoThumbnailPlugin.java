@@ -127,8 +127,6 @@ public class VideoThumbnailPlugin implements FlutterPlugin, MethodCallHandler {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(intToFormat(format), quality, stream);
         bitmap.recycle();
-        if (bitmap == null)
-            throw new NullPointerException();
         return stream.toByteArray();
     }
 
@@ -263,5 +261,6 @@ public class VideoThumbnailPlugin implements FlutterPlugin, MethodCallHandler {
         File videoFile = new File(video);
         FileInputStream inputStream = new FileInputStream(videoFile.getAbsolutePath());
         retriever.setDataSource(inputStream.getFD());
+        inputStream.close();
     }
 }
